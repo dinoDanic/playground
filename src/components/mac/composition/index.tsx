@@ -24,11 +24,10 @@ export const Composition = () => {
 
   useFrame((state, delta) => {
     const r1 = scroll.range(0 / 4, 1 / 4);
-    console.log(r1);
-
     const r2 = scroll.range(1 / 4, 1 / 4);
     const r3 = scroll.visible(4 / 5, 1 / 5);
     mbp16.current.rotation.x = Math.PI - (Math.PI / 2) * rsqw(r1) + r2 * 0.33;
+
     mbp14.current.rotation.x = Math.PI - (Math.PI / 2) * rsqw(r1) - r2 * 0.39;
     groupRef.current.rotation.y = THREE.MathUtils.damp(
       groupRef.current.rotation.y,
@@ -61,12 +60,9 @@ export const Composition = () => {
     <>
       <spotLight position={[0, -width * 0.7, 0]} intensity={0.5} />
       <directionalLight ref={keyLight} castShadow intensity={6}>
-        <orthographicCamera
-          attachObject={["shadow", "camera"]}
-          args={[-10, 10, 10, -10, 0.5, 30]}
-        />
+        <orthographicCamera args={[-10, 10, 10, -10, 0.5, 30]} />
       </directionalLight>
-      <group ref={groupRef}>
+      <group ref={groupRef} position={[0, 0, 0]}>
         <spotLight
           ref={stripLight}
           position={[width * 2.5, 0, width]}
@@ -82,14 +78,14 @@ export const Composition = () => {
           intensity={2}
           distance={width * 3}
         />
-        <M1 ref={mbp16} texture={textureBlue} scale={width / 67}></M1>
+        <M1 ref={mbp16} texture={textureBlue} scale={width / 67} />
         <M1
           ref={mbp14}
           texture={textureBlue}
           scale={width / 77}
           rotation={[0, Math.PI, 0]}
           position={[0, 0, -width / 2.625]}
-        ></M1>
+        />
       </group>
     </>
   );
