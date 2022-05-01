@@ -6,27 +6,26 @@ import { Html, useGLTF, useScroll } from "@react-three/drei";
 import dynamic from "next/dynamic";
 import { useFrame } from "@react-three/fiber";
 
-const rsqw = (t: any, delta = 0.1, a = 1, f = 1 / (2 * Math.PI)) =>
-  (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
+interface Props {}
 
-export const Scene = () => {
+export const Scene: React.FC<Props> = () => {
   const ref = useRef<any>();
   const scroll = useScroll();
 
   const model = useGLTF("http://localhost:3000/iphone.gltf");
+  scroll.offset;
 
-  // const r1 = scroll.range(0 / 4, 1 / 4);
-  // const r2 = scroll.range(1 / 4, 1 / 4);
-  // console.log(r1);
+  // Will start increasing when 1 / 3 of the scroll distance is reached,
+  // and reach 1 when it reaches 2 / 3rds.
 
   useFrame((state, delta) => {
-    // ref.current.rotation.x = -2;
-    // ref.current.rotation.y = -0.7;
-    // ref.current.rotation.z = -0.6;
-    // ref.current.position.z = 2;
+    console.log(window.innerWidth);
+    const a = scroll.range(1 / scroll.pages, 2 / scroll.pages);
+    ref.current.position.x = 12;
+    ref.current.position.x = a * 2;
   });
   return (
-    <group scale={1} ref={ref} position={[0, 0, 0]}>
+    <group ref={ref}>
       <primitive object={model.scene} />
       <pointLight position={[0, 0, 2]} />
     </group>
