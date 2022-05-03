@@ -19,8 +19,8 @@ const Home: NextPage = () => {
       <Link href="/scroll-snap" passHref>
         <h2>scroll-snap</h2>
       </Link>
-      <Link href="/vanilla-shaders" passHref>
-        <h2>vanilla-shaders</h2>
+      <Link href="/vanilla-setup" passHref>
+        <h2>vanilla-setup</h2>
       </Link>
     </div>
   );
