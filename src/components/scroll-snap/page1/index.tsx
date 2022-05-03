@@ -18,7 +18,7 @@ import {
   ScrollControls,
   useHelper,
 } from "@react-three/drei";
-import { Background } from "../../../../public/scroll-snap/fruit/background";
+import { Background } from "../../../../public/scroll-snap/background";
 import { BackgroundLight } from "../../../../public/scroll-snap/background-light";
 
 interface Props {}

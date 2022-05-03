@@ -7,6 +7,21 @@ const Home: NextPage = () => {
       <Link href="/mac" passHref>
         <h2>Mac</h2>
       </Link>
+      <Link href="/background" passHref>
+        <h2>background</h2>
+      </Link>
+      <Link href="/dimonds" passHref>
+        <h2>dimonds</h2>
+      </Link>
+      <Link href="/ff" passHref>
+        <h2>ff</h2>
+      </Link>
+      <Link href="/scroll-snap" passHref>
+        <h2>scroll-snap</h2>
+      </Link>
+      <Link href="/vanilla-shaders" passHref>
+        <h2>vanilla-shaders</h2>
+      </Link>
     </div>
   );
 };
