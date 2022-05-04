@@ -3,24 +3,27 @@ import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <Link href="/mac" passHref>
-        <h2>Mac</h2>
+        Mac
       </Link>
       <Link href="/background" passHref>
-        <h2>background</h2>
+        background
       </Link>
       <Link href="/dimonds" passHref>
-        <h2>dimonds</h2>
+        dimonds
       </Link>
       <Link href="/ff" passHref>
-        <h2>ff</h2>
+        ff
       </Link>
       <Link href="/scroll-snap" passHref>
-        <h2>scroll-snap</h2>
+        scroll-snap
       </Link>
       <Link href="/vanilla-setup" passHref>
-        <h2>vanilla-setup</h2>
+        vanilla-setup
+      </Link>
+      <Link href="/threejs-journey" passHref>
+        threejs journey
       </Link>
     </div>
   );
