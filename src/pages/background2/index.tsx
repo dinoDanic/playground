@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as THREE from "three";
 import { Cube } from "components/vanilla-setup/Cube";
 
-const VanillaSetup = () => {
+const Background2 = () => {
   const refBody = useRef<HTMLDivElement>(null);
   const [renderer, setRenderer] = useState<THREE.WebGLRenderer>();
   const [scene] = useState(new THREE.Scene());
@@ -22,7 +22,39 @@ const VanillaSetup = () => {
     if (container && !renderer) {
       const scW = container.clientWidth;
       const scH = container.clientHeight;
-      console.log(scH);
+
+      const geometry = new THREE.PlaneGeometry(5, 5, 128, 128);
+      const material = new THREE.ShaderMaterial({
+        uniforms: {
+          color1: {
+            value: new THREE.Color("red"),
+          },
+          color2: {
+            value: new THREE.Color("purple"),
+          },
+        },
+        vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+        }
+      `,
+        fragmentShader: `
+        uniform vec3 color1;
+        uniform vec3 color2;
+        varying vec2 vUv;
+        void main() {
+          gl_FragColor = vec4(mix(color1, color2, vUv.y), 1.0);
+        }
+      `,
+        wireframe: false,
+      });
+      const mesh = new THREE.Mesh(geometry, material);
+
+      mesh.rotation.x = -2;
+
+      scene.add(mesh);
 
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(scW, scH);
@@ -35,7 +67,8 @@ const VanillaSetup = () => {
 
       camera.position.copy(new THREE.Vector3(0, 2, 0));
 
-      const ambientLight = new THREE.AmbientLight(0, 1);
+      const ambientLight = new THREE.AmbientLight(0x404040);
+      ambientLight.castShadow = true;
       scene.add(ambientLight);
 
       const controls = new OrbitControls(camera, renderer.domElement);
@@ -72,10 +105,8 @@ const VanillaSetup = () => {
     <div
       ref={refBody}
       style={{ width: "100%", height: "100%", position: "fixed" }}
-    >
-      <Cube scene={scene} />
-    </div>
+    ></div>
   );
 };
 
-export default VanillaSetup;
+export default Background2;
