@@ -23,36 +23,34 @@ const Background2 = () => {
       const scW = container.clientWidth;
       const scH = container.clientHeight;
 
-      const geometry = new THREE.PlaneGeometry(5, 5, 128, 128);
+      const geometry = new THREE.PlaneGeometry(10, 5, 128, 128);
       const material = new THREE.ShaderMaterial({
         uniforms: {
           color1: {
-            value: new THREE.Color("red"),
+            value: new THREE.Color("black"),
           },
           color2: {
             value: new THREE.Color("purple"),
           },
         },
         vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
-        }
-      `,
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+          }
+        `,
         fragmentShader: `
-        uniform vec3 color1;
-        uniform vec3 color2;
-        varying vec2 vUv;
-        void main() {
-          gl_FragColor = vec4(mix(color1, color2, vUv.y), 1.0);
-        }
-      `,
+          uniform vec3 color1;
+          uniform vec3 color2;
+          varying vec2 vUv;
+          void main() {
+            gl_FragColor = vec4(mix(color1, color2, vUv.y), 1);
+          }
+        `,
         wireframe: false,
       });
       const mesh = new THREE.Mesh(geometry, material);
-
-      mesh.rotation.x = -2;
 
       scene.add(mesh);
 
@@ -63,18 +61,29 @@ const Background2 = () => {
       container.appendChild(renderer.domElement);
       setRenderer(renderer);
 
-      const camera = new THREE.PerspectiveCamera(75, scW / scH, 0.1, 100);
+      const realCamera = new THREE.PerspectiveCamera(75, scW / scH, 0.1, 100);
+      const orbitCamera = new THREE.PerspectiveCamera(75, scW / scH, 0.1, 100);
+      scene.add(realCamera);
 
-      camera.position.copy(new THREE.Vector3(0, 2, 0));
+      realCamera.position.set(0, 0, 3);
+      orbitCamera.position.set(0, 0, 3);
+
+      const helper = new THREE.CameraHelper(realCamera);
+      scene.add(helper);
+      const axesHelper = new THREE.AxesHelper(5);
+      scene.add(axesHelper);
 
       const ambientLight = new THREE.AmbientLight(0x404040);
       ambientLight.castShadow = true;
       scene.add(ambientLight);
 
-      const controls = new OrbitControls(camera, renderer.domElement);
+      const controls = new OrbitControls(orbitCamera, renderer.domElement);
       controls.enableDamping = true;
 
-      renderer.render(scene, camera);
+      const size = 10;
+      const divisions = 10;
+
+      renderer.render(scene, orbitCamera);
 
       const clock = new THREE.Clock();
 
@@ -85,7 +94,7 @@ const Background2 = () => {
         controls.update();
 
         // Render
-        renderer.render(scene, camera);
+        renderer.render(scene, orbitCamera);
 
         // Call tick again on the next frame
         window.requestAnimationFrame(tick);
