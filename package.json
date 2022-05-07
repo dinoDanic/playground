@@ -15,8 +15,10 @@
     "@react-three/postprocessing": "^2.3.2",
     "@types/styled-components": "^5.1.25",
     "@types/three": "^0.139.0",
+    "canvas-sketch-util": "^1.10.0",
     "glslify-loader": "^2.0.0",
     "lamina": "^1.1.18",
+    "leva": "^0.9.25",
     "next": "12.1.5",
     "next-absolute-url": "^1.2.2",
     "next-transpile-modules": "^9.0.0",
@@ -33,6 +35,7 @@
     "@types/react-dom": "18.0.3",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.5",
+    "r3f-perf": "^6.0.1",
     "typescript": "4.6.4"
   }
 }
