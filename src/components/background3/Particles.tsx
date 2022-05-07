@@ -64,9 +64,9 @@ export const Particles: React.FC<Props> = ({ two, count, color }) => {
       const factor = generateRandom(20, 120);
       const speed = generateRandom(0.01, 0.015) / 2;
       const x = two ? generateRandom(15, 0) : generateRandom(-15, 0);
-      const scale = generateRandom(0.5, 1.7);
+      const scale = generateRandom(0.5, 1.51);
       const y = two ? generateRandom(-10, 0) : generateRandom(0, 10);
-      const z = generateRandom(1, 10);
+      const z = generateRandom(1, 20);
 
       temp.push({ time, factor, speed, x, y, z, scale });
     }
@@ -78,7 +78,7 @@ export const Particles: React.FC<Props> = ({ two, count, color }) => {
       <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
         <dodecahedronBufferGeometry args={[0.2, 0]} />
         <ringGeometry ref={ringRef} args={[0, 0.3, 5]} />
-        <meshBasicMaterial color={color} opacity={0.04} transparent />
+        <meshBasicMaterial color={color} opacity={0.05} transparent />
       </instancedMesh>
     </group>
   );

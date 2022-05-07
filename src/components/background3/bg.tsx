@@ -16,11 +16,11 @@ export const Bg = () => {
         />
         <Noise
           type="white"
-          scale={1000}
+          scale={10}
           colorA="white"
           colorB="black"
           mode="subtract"
-          alpha={0.3}
+          alpha={0.25}
         />
       </LayerMaterial>
     </mesh>
