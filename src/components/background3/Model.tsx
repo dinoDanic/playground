@@ -8,17 +8,17 @@ export const Model = () => {
   const spotLightRef = useRef<any>();
   const groupRef = useRef<any>();
   const { mouse } = useThree();
+  useFrame(() => {
+    groupRef.current.rotation.y = -mouse.x / 10;
+    groupRef.current.rotation.x = mouse.y / 10;
+  });
 
   useHelper(spotLightRef, SpotLightHelper, "blue");
-  useFrame(() => {
-    groupRef.current.rotation.y = -mouse.x / 5;
-    groupRef.current.rotation.x = mouse.y / 5;
-  });
   return (
-    <group scale={1} position={[0, 0, 47]}>
+    <group ref={groupRef} scale={2} position={[0, 0, 45]}>
       {/* <ambientLight intensity={0.1} /> */}
       <spotLight ref={spotLightRef} position={[5, 2, 3]} intensity={0.5} />
-      <primitive ref={groupRef} object={model.scene} />
+      <primitive object={model.scene} />
     </group>
   );
 };

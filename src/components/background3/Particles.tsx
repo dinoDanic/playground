@@ -1,6 +1,6 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { DepthOfField, EffectComposer } from "@react-three/postprocessing";
-import { Color, Depth, LayerMaterial, Noise } from "lamina";
+import { Color, LayerMaterial, Noise } from "lamina";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -68,7 +68,7 @@ export const Particles: React.FC<Props> = ({ two, count, color }) => {
       const scale = generateRandom(0.5, 1.51);
       const y = two ? generateRandom(-10, 0) : generateRandom(0, 10);
       const z = generateRandom(1, 15);
-      const rotationSpeed = generateRandom(0.0005, 0.0006);
+      const rotationSpeed = generateRandom(0.0005, 0.0007);
 
       temp.push({ time, factor, speed, x, y, z, scale, rotationSpeed });
     }
@@ -81,6 +81,9 @@ export const Particles: React.FC<Props> = ({ two, count, color }) => {
         <dodecahedronBufferGeometry args={[0.2, 0]} />
         <ringGeometry ref={ringRef} args={[0, 0.3, 5]} />
         <meshBasicMaterial color={color} opacity={0.03} transparent />
+        {/* <LayerMaterial>
+          <Color />
+        </LayerMaterial> */}
       </instancedMesh>
     </group>
   );

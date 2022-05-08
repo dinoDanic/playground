@@ -22,7 +22,6 @@ const VanillaSetup = () => {
     if (container && !renderer) {
       const scW = container.clientWidth;
       const scH = container.clientHeight;
-      console.log(scH);
 
       const renderer = new THREE.WebGLRenderer();
       renderer.setSize(scW, scH);

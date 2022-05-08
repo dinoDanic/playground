@@ -19,7 +19,6 @@ export const Scene: React.FC<Props> = () => {
   // and reach 1 when it reaches 2 / 3rds.
 
   useFrame((state, delta) => {
-    console.log(window.innerWidth);
     const a = scroll.range(1 / scroll.pages, 2 / scroll.pages);
     ref.current.position.x = 12;
     ref.current.position.x = a * 2;

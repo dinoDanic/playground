@@ -9,10 +9,10 @@ export const Bg = () => {
       <LayerMaterial attach="material">
         <Depth
           colorB="black"
-          colorA="#0e4418"
+          colorA="#11531d"
           near={20}
-          far={55}
-          origin={[20, 31, 0]}
+          far={45}
+          origin={[10, 31, 0]}
         />
         <Noise
           type="white"
@@ -20,7 +20,7 @@ export const Bg = () => {
           colorA="white"
           colorB="black"
           mode="subtract"
-          alpha={0.35}
+          alpha={0.2}
         />
       </LayerMaterial>
     </mesh>
