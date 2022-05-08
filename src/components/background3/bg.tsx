@@ -6,7 +6,7 @@ export const Bg = () => {
   return (
     <mesh scale={10} position={[0, 0, 0]}>
       <planeBufferGeometry args={[100, 100, 1]} />
-      <LayerMaterial>
+      <LayerMaterial attach="material">
         <Depth
           colorB="black"
           colorA="#0e4418"
@@ -20,7 +20,7 @@ export const Bg = () => {
           colorA="white"
           colorB="black"
           mode="subtract"
-          alpha={0.25}
+          alpha={0.35}
         />
       </LayerMaterial>
     </mesh>

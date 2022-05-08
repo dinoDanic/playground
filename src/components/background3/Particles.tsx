@@ -1,6 +1,6 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { DepthOfField, EffectComposer } from "@react-three/postprocessing";
-import { LayerMaterial } from "lamina";
+import { Color, Depth, LayerMaterial, Noise } from "lamina";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -26,15 +26,15 @@ export const Particles: React.FC<Props> = ({ two, count, color }) => {
     groupRef.current.rotation.y = -mouse.x / 20;
     groupRef.current.rotation.x = mouse.y / 20;
     particles.forEach((particle, index) => {
-      const { factor, speed, x, y, z, scale } = particle;
+      const { factor, speed, x, y, z, scale, rotationSpeed } = particle;
 
       const t = (particle.time += speed);
 
       dummy.position.set(
-        x + Math.cos((t / 100) * factor) + (Math.sin(t * 1) * factor) / 100,
-        y + Math.sin((t / 100) * factor) + (Math.cos(t * 1) * factor) / 100,
-        z
-        // z + Math.cos((t / 10) * factor) + (Math.sin(t * 3) * factor) / 10
+        x + Math.cos((t / 200) * factor) + (Math.sin(t * 1) * factor) / 200,
+        y + Math.sin((t / 200) * factor) + (Math.cos(t * 1) * factor) / 200,
+        // z
+        z + Math.cos((t / 100) * factor) + (Math.sin(t * 3) * factor) / 100
 
         // x + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
         // y + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 10,
@@ -43,6 +43,7 @@ export const Particles: React.FC<Props> = ({ two, count, color }) => {
       const s = Math.cos(t);
       dummy.scale.set(scale, scale, scale);
       // dummy.rotation.set(s * 5, s * 5, s * 5);
+      dummy.rotation.z += Math.cos(rotationSpeed) / 1500;
       dummy.updateMatrix();
       mesh.current.setMatrixAt(index, dummy.matrix);
     });
@@ -66,9 +67,10 @@ export const Particles: React.FC<Props> = ({ two, count, color }) => {
       const x = two ? generateRandom(15, 0) : generateRandom(-15, 0);
       const scale = generateRandom(0.5, 1.51);
       const y = two ? generateRandom(-10, 0) : generateRandom(0, 10);
-      const z = generateRandom(1, 20);
+      const z = generateRandom(1, 15);
+      const rotationSpeed = generateRandom(0.0005, 0.0006);
 
-      temp.push({ time, factor, speed, x, y, z, scale });
+      temp.push({ time, factor, speed, x, y, z, scale, rotationSpeed });
     }
     return temp;
   }, [count]);
@@ -78,7 +80,7 @@ export const Particles: React.FC<Props> = ({ two, count, color }) => {
       <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
         <dodecahedronBufferGeometry args={[0.2, 0]} />
         <ringGeometry ref={ringRef} args={[0, 0.3, 5]} />
-        <meshBasicMaterial color={color} opacity={0.05} transparent />
+        <meshBasicMaterial color={color} opacity={0.03} transparent />
       </instancedMesh>
     </group>
   );

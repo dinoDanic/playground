@@ -25,6 +25,12 @@ const Home: NextPage = () => {
       <Link href="/threejs-journey" passHref>
         threejs journey
       </Link>
+      <Link href="/background2" passHref>
+        background2
+      </Link>
+      <Link href="/background3" passHref>
+        background3
+      </Link>
     </div>
   );
 };
