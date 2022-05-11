@@ -498,6 +498,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@pmndrs/cannon-worker-api@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@pmndrs/cannon-worker-api/-/cannon-worker-api-2.1.0.tgz#c4650a59a9f4e919157c85a0dfcd37894dd2b31f"
+  integrity sha512-sXqDYEWfY99LYwnHcr3nPeTSqkXii2MBFG2O2Yv/+PIy63tiBJz5CIijkPr1+dmLV2YGSQjSzQFcaTNFMcOcRA==
+
 "@radix-ui/popper@0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@radix-ui/popper/-/popper-0.1.0.tgz#c387a38f31b7799e1ea0d2bb1ca0c91c2931b063"
@@ -757,6 +762,15 @@
     "@react-spring/core" "~9.4.4"
     "@react-spring/shared" "~9.4.4"
     "@react-spring/types" "~9.4.4"
+
+"@react-three/cannon@^6.3.0":
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/@react-three/cannon/-/cannon-6.3.0.tgz#7773270bcdb797a4287b7d389159eb9433dc3bec"
+  integrity sha512-ZLX/LtJRRi2J/jFcZsZ19q6lrTBQxm5OtY0D9GOdV1vNiwyM9ACRoaMXMHN0zUdaUn7Psls9w5n1VfF5FY4C7Q==
+  dependencies:
+    "@pmndrs/cannon-worker-api" "^2.1.0"
+    cannon-es "^0.19.0"
+    cannon-es-debugger "^1.0.0"
 
 "@react-three/drei@^9.0.1":
   version "9.7.1"
@@ -1408,6 +1422,16 @@ caniuse-lite@^1.0.30001283, caniuse-lite@^1.0.30001332:
   version "1.0.30001334"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001334.tgz#892e9965b35285033fc2b8a8eff499fe02f13d8b"
   integrity sha512-kbaCEBRRVSoeNs74sCuq92MJyGrMtjWVfhltoHUCW4t4pXFvGjUBrfo47weBRViHkiV3eBYyIsfl956NtHGazw==
+
+cannon-es-debugger@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/cannon-es-debugger/-/cannon-es-debugger-1.0.0.tgz#28c6679b30dcf608e978225239f447a8fe55ccb4"
+  integrity sha512-sE9lDOBAYFKlh+0w+cvWKwUhJef8HYnUSVPWPL0jD15MAuVRQKno4QYZSGxgOoJkMR3mQqxL4bxys2b3RSWH8g==
+
+cannon-es@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/cannon-es/-/cannon-es-0.19.0.tgz#f62fa04097e375877db8f3895f27bb6d499395c0"
+  integrity sha512-fu9UXrjFmAQXq3JyBVPbtyc53suX+QHzikZEJykxroVNnIx1xHq0jZenK8qwhdwbBAtDL9n/47TyPELuSQwZuA==
 
 canvas-sketch-util@^1.10.0:
   version "1.10.0"
@@ -4788,6 +4812,11 @@ use-error-boundary@2.0.6:
   resolved "https://registry.yarnpkg.com/use-error-boundary/-/use-error-boundary-2.0.6.tgz#10f0cd45f6e53cedca8a567fa2b7bc8c709e4420"
   integrity sha512-AWCVKSAanLe6R/on/ZkHYtGKfXs8BQX6z/TUGYqtvkajLqQyrGKJJscbahtq8OyN8L3LqTRjJWx4gCOLmfIObw==
 
+use-sync-external-store@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.1.0.tgz#3343c3fe7f7e404db70f8c687adf5c1652d34e82"
+  integrity sha512-SEnieB2FPKEVne66NpXPd1Np4R1lTNKfjuy3XdIoPQKYBAFdzbzSZlSn1KJZUiihQLQC5Znot4SBz1EOTBwQAQ==
+
 utility-types@^3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.10.0.tgz#ea4148f9a741015f05ed74fd615e1d20e6bed82b"
@@ -4983,3 +5012,10 @@ zustand@^3.5.13, zustand@^3.6.9, zustand@^3.7.1:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.7.2.tgz#7b44c4f4a5bfd7a8296a3957b13e1c346f42514d"
   integrity sha512-PIJDIZKtokhof+9+60cpockVOq05sJzHCriyvaLBmEJixseQ1a5Kdov6fWZfWOu5SK9c+FhH1jU0tntLxRJYMA==
+
+zustand@^4.0.0-rc.1:
+  version "4.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.0.0-rc.1.tgz#ec30a3afc03728adec7e1bd7bcc3592176372201"
+  integrity sha512-qgcs7zLqBdHu0PuT3GW4WCIY5SgXdsv30GQMu9Qpp1BA2aS+sNS8l4x0hWuyEhjXkN+701aGWawhKDv6oWJAcw==
+  dependencies:
+    use-sync-external-store "1.1.0"
