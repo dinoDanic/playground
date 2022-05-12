@@ -18,12 +18,11 @@ type animations =
 export const Dude = ({ ...props }) => {
   const [currentAnimation, setCurrentAnimation] = useState<animations>("Idle");
   const [fov, setFov] = useState(50);
-  const [rotation, setRotation] = useState([-0.3, 0, 0]);
-  const [position, setPosition] = useState({ x: 0, y: 3, z: 5 });
+  const [position, setPosition] = useState({ x: 0, y: 5, z: 8 });
   const { nodes, materials, animations } = useGLTF(
     "http://localhost:3000/game5/Dude/Dude.gltf"
   );
-  const group = useRef();
+  const group = useRef<any>();
   const { camera } = useThree();
   const activeAction = useRef<any>();
   const previousAction = useRef<any>();
@@ -33,10 +32,10 @@ export const Dude = ({ ...props }) => {
     "http://localhost:3000/game5/Dude/ClothedLightSkin.png"
   );
 
-  const [ref, api] = useCompoundBody(() => ({
-    mass: 200,
+  const [ref, api] = useCompoundBody<any>(() => ({
+    mass: 1000,
     type: "Dynamic",
-    position: [0, 2, 0],
+    position: [0, 1, 0],
     ...props,
     shapes: [
       // { args: [1.5], position: [0, 4, 0], type: "Sphere" },
@@ -52,7 +51,7 @@ export const Dude = ({ ...props }) => {
   const rotateAngleFrontAxis = new Vector3(0, 1, 0);
   const rotateAngleSideAxis = new Vector3(0, 0, 0);
   const rotateQuarternion = new Quaternion();
-  const speed = movement.sprint ? 9 : 5.1;
+  const speed = movement.sprint ? 13 : 8;
 
   const walkDirection = new Vector3();
   useFrame(() => {
@@ -72,18 +71,14 @@ export const Dude = ({ ...props }) => {
     /* camera position when walking */
 
     const easeSpeed = sprint ? 0.05 : 0.02;
-    console.log(position.x);
-
     if (right && position.x < 1) {
       setPosition({ ...position, x: position.x + easeSpeed });
     } else if (left && position.x >= -1) {
       setPosition({ ...position, x: position.x - easeSpeed });
     } else if (!left && !right) {
       if (position.x > 0.01) {
-        console.log("radim ovo");
         setPosition({ ...position, x: position.x - easeSpeed });
       } else if (position.x < -0.01) {
-        console.log("radim ovo2");
         setPosition({ ...position, x: position.x + easeSpeed });
       }
     }
@@ -105,8 +100,9 @@ export const Dude = ({ ...props }) => {
         forward || backward ? rotateAngleFrontAxis : rotateAngleSideAxis,
         directionOffset
       );
-
-      walkDirection.normalize().multiplyScalar(speed);
+      if (forward || backward) {
+        walkDirection.normalize().multiplyScalar(speed);
+      }
 
       const moveX = walkDirection.x;
       const rotateY = right ? -Math.PI : left ? Math.PI : 0;
@@ -137,23 +133,7 @@ export const Dude = ({ ...props }) => {
     api.angularVelocity.subscribe((av) => (angularVelocity.current = av));
   }, []);
 
-  // if (movement.forward && movement.sprint && movement.jump) {
-  //   api.velocity.set(0, 2, 7);
-  // } else if (movement.forward && movement.jump) {
-  //   api.velocity.set(0, 2, 4);
-  // } else if (movement.forward && movement.sprint) {
-  //   api.velocity.set(0, 0, 7);
-  // } else if (movement.forward) {
-  //   api.velocity.set(0, 0, 4.4);
-  // } else if (movement.jump) {
-  //   api.velocity.set(0, 2, 0);
-  // } else if (movement.right) {
-  //   ref.current.rotation.y += 1;
-  // }
-  // });
-
   useEffect(() => {
-    console.log(movement);
     if (movement.forward && movement.sprint && movement.jump) {
       setCurrentAnimation("Jump");
     } else if (movement.forward && movement.jump) {
@@ -187,8 +167,11 @@ export const Dude = ({ ...props }) => {
     }
   }, [actions, animations, currentAnimation]);
 
+  console.log(ref);
+
   return (
     <group ref={ref} receiveShadow castShadow>
+      {/* <axesHelper /> */}
       <PerspectiveCamera
         makeDefault
         position={[position.x, position.y, position.z]}
@@ -196,7 +179,7 @@ export const Dude = ({ ...props }) => {
         fov={fov}
       />
       <group ref={group} {...props} dispose={null} rotation={[0, Math.PI, 0]}>
-        <group receiveShadow castShadow scale={20} position={[0, 0, 0]}>
+        <group receiveShadow castShadow scale={40} position={[0, 0, 0]}>
           <primitive object={nodes.Hips} />
         </group>
 

@@ -5,7 +5,7 @@ import { Mesh } from "three";
 export const Ground = ({ ...props }) => {
   const meshRef = useRef<Mesh>(null);
 
-  const [ref, api] = usePlane(() => ({
+  const [ref, api] = usePlane<any>(() => ({
     rotation: [-Math.PI / 2, 0, 0],
     ...props,
   }));
