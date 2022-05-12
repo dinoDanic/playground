@@ -13,7 +13,6 @@ export const Ground = ({ ...props }) => {
     if (!meshRef.current) return;
     meshRef.current.rotation.x = -Math.PI / 2;
   }, []);
-  console.log(ref);
 
   return (
     <mesh receiveShadow ref={ref}>
